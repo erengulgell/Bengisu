@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benim BENGİSU'm</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #ffe6e6, #ffe6f0);
+      font-family: 'Arial', sans-serif;
+      overflow-x: hidden;
+      text-align: center;
+      color: #d6336c;
+      position: relative;
+    }
+    h1 {
+      margin-top: 30px;
+      font-size: 36px;
+    }
+    .photo-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      margin: 40px 20px;
+      gap: 20px;
+    }
+    .photo-section img {
+      width: 300px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.5s;
+      cursor: pointer;
+    }
+    .photo-section img:hover {
+      transform: scale(1.05);
+    }
+    .photo-text {
+      max-width: 300px;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      transform: rotate(45deg);
+      animation: float 8s infinite;
+    }
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-1000px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+    @keyframes burst {
+      0% { opacity: 1; transform: scale(1) rotate(45deg); }
+      100% { opacity: 0; transform: scale(0) translate(0, 0) rotate(45deg); }
+    }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 28px;
+      }
+      .photo-section {
+        flex-direction: column;
+      }
+      .photo-text {
+        font-size: 18px;
+      }
+    }
+    iframe {
+      display: none;
+    }
+    .play-music-button {
+      background-color: #d6336c;
+      color: white;
+      font-size: 18px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+    .play-music-button:hover {
+      background-color: #b02a5d;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Benim Canım Bengisu'm</h1>
+
+  <!-- 1. Fotoğraf ve Metin -->
+  <div class="photo-section">
+    <img src="https://i.imgur.com/z8r8e0c.jpeg" alt="Aşk Fotoğrafı 1">
+    <div class="photo-text">
+      <p><b>B</b>ir ömre seninle başlamak en büyük hayalim.</p>
+      <p><b>E</b>llerini tuttuğum an dünyam aydınlanıyor.</p>
+    </div>
+  </div>
+
+  <!-- 2. Fotoğraf ve Metin -->
+  <div class="photo-section">
+    <img src="https://i.imgur.com/YTmxfB6.jpeg" alt="Aşk Fotoğrafı 2">
+    <div class="photo-text">
+      <p><b>N</b>e zaman gözlerine baksam kayboluyorum.</p>
+      <p><b>G</b>ülüşün içimi ısıtan en güzel melodi.</p>
+    </div>
+  </div>
+
+  <!-- 3. Fotoğraf ve Metin -->
+  <div class="photo-section">
+    <img src="https://i.imgur.com/tuADyd7.jpeg" alt="Aşk Fotoğrafı 3">
+    <div class="photo-text">
+      <p><b>İ</b>çimdeki tüm sevgiyi seninle yaşıyorum.</p>
+      <p><b>S</b>en, hayatımın en güzel hediyesisin.</p>
+    </div>
+  </div>
+
+  <!-- 4. Fotoğraf ve Metin -->
+  <div class="photo-section">
+    <img src="https://i.imgur.com/y4WaRQw.jpeg" alt="Aşk Fotoğrafı 4">
+    <div class="photo-text">
+      <p><b>U</b>mutlarımın adı oldun, geleceğimsin.</p>
+    </div>
+  </div>
+
+  <!-- Müzik Butonu -->
+  <button class="play-music-button" id="playMusicBtn">Müziği Başlat</button>
+
+  <!-- Kalp Patlaması Efekti -->
+  <script>
+    function createBurst(x, y) {
+      const numberOfHearts = 20; // Fırlatılacak kalp sayısı
+      for (let i = 0; i < numberOfHearts; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = ${x - 10}px;
+        heart.style.top = ${y - 10}px;
+        heart.style.position = "absolute";
+        heart.style.animation = "burst 1s forwards";
+        document.body.appendChild(heart);
+
+        const angle = Math.random() * 2 * Math.PI; // Rastgele açı
+        const distance = Math.random() * 100; // Kalp uzaklığı
+        const translateX = Math.cos(angle) * distance;
+        const translateY = Math.sin(angle) * distance;
+        heart.style.transform = translate(${translateX}px, ${translateY}px) rotate(45deg);
+
+        setTimeout(() => {
+          heart.remove(); // Kalpler kaybolacak
+        }, 1000);
+      }
+    }
+
+    // Fotoğraflara tıklama olayını ekleyelim
+    const images = document.querySelectorAll('.photo-section img');
+    images.forEach(img => {
+      img.addEventListener('click', (e) => {
+        const x = e.pageX;
+        const y = e.pageY;
+        createBurst(x, y); // Kalp patlamasını tetikle
+      });
+    });
+
+    // Müzik başlatma fonksiyonu
+    document.getElementById('playMusicBtn').addEventListener('click', function() {
+      const iframe = document.createElement('iframe');
+      iframe.src = "https://www.youtube.com/embed/VV14aYo-BkY?autoplay=1&loop=1&playlist=VV14aYo-BkY";
+      iframe.frameborder = "0";
+      iframe.allow = "autoplay";
+      iframe.style.display = "none";
+      document.body.appendChild(iframe);
+    });
+  </script>
+
+</body>
+</html>
